@@ -10,80 +10,50 @@ package trabalho;
  */
 public class Cliente {
 
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the sobrenome
-     */
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    /**
-     * @param sobrenome the sobrenome to set
-     */
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    /**
-     * @return the rg
-     */
-    public String getRg() {
-        return rg;
-    }
-
-    /**
-     * @param rg the rg to set
-     */
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    /**
-     * @return the cpf
-     */
-    public String getCpf() {
-        return cpf;
-    }
-
-    /**
-     * @param cpf the cpf to set
-     */
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    /**
-     * @return the endereco
-     */
-    public String getEndereco() {
-        return endereco;
-    }
-
-    /**
-     * @param endereco the endereco to set
-     */
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
     private String nome;
     private String sobrenome;
     private String rg;
     private String cpf;
     private String endereco;
     
-    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
 }
