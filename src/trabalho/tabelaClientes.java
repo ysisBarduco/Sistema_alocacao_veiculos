@@ -10,13 +10,14 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author User
+ * @author Ysis
+ * @author Luana
  */
-public class tabelaClientes extends AbstractTableModel {
+public class TabelaClientes extends AbstractTableModel {
     private String[] colunas = new String[]{"Nome", "Sobrenome", "RG", "CPF", "Endereço"};
     private List<Cliente> lista = new ArrayList();
     
-    public tabelaClientes() {
+    public TabelaClientes() {
     }
 
     @Override
@@ -27,6 +28,11 @@ public class tabelaClientes extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         return this.colunas.length;
+    }
+    
+    @Override
+    public String getColumnName(int index) {
+        return this.colunas[index];
     }
 
     @Override
@@ -48,4 +54,34 @@ public class tabelaClientes extends AbstractTableModel {
         }
     }
     
+    public boolean removerCliente(Cliente c){
+        int linha = this.lista.indexOf(c);
+        boolean resultado = this.lista.remove(c);
+        this.fireTableRowsDeleted(linha, linha); //Atualiza a JTable
+        return resultado;
+    }
+    
+    public void AdicionarCliente(Cliente c){
+        this.lista.add(c);
+        this.fireTableRowsInserted(lista.size()-1, lista.size()-1); //Atualiza a JTable
+    }
+    
+    public List<Cliente> getLista(){
+        return lista;
+    }
+    
+    public void setLista(List<Cliente> clientes){
+        this.lista = clientes;
+        this.fireTableDataChanged();
+    }
+    
+    public Cliente getSelecionado(int linha){
+        return lista.get(linha);
+    }
+    
+    public void removerClientes(List<Cliente> selecionadosExcluir){
+        selecionadosExcluir.forEach((cliente) -> {
+            removerCliente(cliente);
+        });
+    }
 }

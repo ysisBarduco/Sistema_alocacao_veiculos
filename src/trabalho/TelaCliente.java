@@ -4,14 +4,22 @@
  */
 package trabalho;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author User
+ * @author Ysis
+ * @author Luana
  */
 public class TelaCliente extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCliente.class.getName());
-
+    private TabelaClientes tabelaClientesModel = new TabelaClientes();
+    private int linhaSelecionada = 0;
+    private Cliente clienteSelecionado;
+    
     /**
      * Creates new form TelaCliente
      */
@@ -44,6 +52,8 @@ public class TelaCliente extends javax.swing.JFrame {
         tituloTela = new javax.swing.JLabel();
         scroll = new javax.swing.JScrollPane();
         tabelaClientes = new javax.swing.JTable();
+        enderecoLabel = new javax.swing.JLabel();
+        enderecoInput = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,15 +85,19 @@ public class TelaCliente extends javax.swing.JFrame {
         cpfLabel.setText("CPF:");
 
         inserirButton.setText("Inserir");
+        inserirButton.addActionListener(this::inserirButtonActionPerformed);
 
         atualizarButton.setText("Atualizar");
 
         excluirButton.setText("Excluir");
+        excluirButton.addActionListener(this::excluirButtonActionPerformed);
 
         tituloTela.setText("Clientes");
 
         tabelaClientes.setModel(tabelaClientesModel);
         scroll.setViewportView(tabelaClientes);
+
+        enderecoLabel.setText("Endereço:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,40 +107,46 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tituloTela)
                 .addGap(191, 191, 191))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeLabel)
-                            .addComponent(sobrenomeLabel)
-                            .addComponent(rgLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(enderecoLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(enderecoInput))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(76, 76, 76)
-                                        .addComponent(inserirButton))
-                                    .addComponent(rgInput))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomeLabel)
+                                    .addComponent(sobrenomeLabel)
+                                    .addComponent(rgLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cpfLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cpfInput))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(atualizarButton)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(76, 76, 76)
+                                                .addComponent(inserirButton))
+                                            .addComponent(rgInput))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(excluirButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(nomeInput, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                                .addComponent(sobrenomeInput)))
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(cpfLabel)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(cpfInput))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(atualizarButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(excluirButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(nomeInput, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                                        .addComponent(sobrenomeInput)))))
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,13 +167,17 @@ public class TelaCliente extends javax.swing.JFrame {
                     .addComponent(rgLabel)
                     .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cpfLabel))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enderecoLabel)
+                    .addComponent(enderecoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inserirButton)
                     .addComponent(atualizarButton)
                     .addComponent(excluirButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -171,6 +195,34 @@ public class TelaCliente extends javax.swing.JFrame {
     private void sobrenomeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobrenomeInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sobrenomeInputActionPerformed
+
+    private void inserirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirButtonActionPerformed
+        String nome = nomeInput.getText();
+        String sobrenome = sobrenomeInput.getText();
+        String rg = rgInput.getText();
+        String cpf = cpfInput.getText();
+        String endereco = enderecoInput.getText();
+        
+        Cliente c = new Cliente(nome, sobrenome, rg, cpf, endereco);
+        
+        if(tabelaClientesModel.getLista().contains(c)){
+            JOptionPane.showMessageDialog(null,"Esse cliente já está cadastrado!" + "\n", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        tabelaClientesModel.AdicionarCliente(c);
+    }//GEN-LAST:event_inserirButtonActionPerformed
+
+    private void excluirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirButtonActionPerformed
+        List<Cliente> lista = getSelecionadosExcluir();
+        if(lista.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Selecione pelo menos um cliente!" + "\n", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;            
+        }
+        
+        clienteSelecionado = null;
+        tabelaClientesModel.removerClientes(lista);
+    }//GEN-LAST:event_excluirButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,10 +249,24 @@ public class TelaCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaCliente().setVisible(true));
     }
 
+    public List<Cliente> getSelecionadosExcluir(){
+        int[] linhasSelecionadas = this.tabelaClientes.getSelectedRows();
+        List<Cliente> listaExcluir = new ArrayList();
+        
+        for(int i =0; i < linhasSelecionadas.length; i++){
+            Cliente cliente = tabelaClientesModel.getSelecionado(linhasSelecionadas[i]);
+            listaExcluir.add(cliente);
+        }
+        
+        return listaExcluir;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizarButton;
     private javax.swing.JTextField cpfInput;
     private javax.swing.JLabel cpfLabel;
+    private javax.swing.JTextField enderecoInput;
+    private javax.swing.JLabel enderecoLabel;
     private javax.swing.JButton excluirButton;
     private javax.swing.JButton inserirButton;
     private javax.swing.JScrollPane jScrollPane1;

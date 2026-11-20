@@ -6,7 +6,8 @@ package trabalho;
 
 /**
  *
- * @author User
+ * @author Ysis
+ * @author Luana
  */
 public class Cliente {
 
@@ -63,5 +64,4 @@ public class Cliente {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-
 }
