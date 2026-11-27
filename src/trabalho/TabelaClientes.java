@@ -1,6 +1,6 @@
 package trabalho;
 
-import java.util.ArrayList;
+import Veiculo.newpackage.Repositorio;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TabelaClientes extends AbstractTableModel {
     private String[] colunas = new String[]{"Nome", "Sobrenome", "RG", "CPF", "Endereço"};
-    private List<Cliente> lista = new ArrayList();
+    private final List<Cliente> lista = Repositorio.clientes;
     
     public TabelaClientes() {
     }
@@ -71,7 +71,10 @@ public class TabelaClientes extends AbstractTableModel {
     }
     
     public void setLista(List<Cliente> clientes){
-        this.lista = clientes;
+        if (clientes != this.lista) {
+            this.lista.clear();
+            this.lista.addAll(clientes);
+        }
         this.fireTableDataChanged();
     }
     
