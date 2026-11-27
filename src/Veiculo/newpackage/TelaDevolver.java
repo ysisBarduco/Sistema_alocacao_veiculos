@@ -3,14 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Veiculo.newpackage;
-/**
- *
- * @author Lunna
- */
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -22,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+/**
+ * @author Lunna
+ */
 public class TelaDevolver extends JFrame {
 
     private final TabelaVeiculosLocadosModel model = new TabelaVeiculosLocadosModel();
@@ -33,6 +28,7 @@ public class TelaDevolver extends JFrame {
         setSize(980, 420);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
         add(new JScrollPane(tabela), BorderLayout.CENTER);
 
@@ -92,4 +88,4 @@ public class TelaDevolver extends JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
+
