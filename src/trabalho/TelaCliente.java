@@ -294,7 +294,7 @@ public class TelaCliente extends javax.swing.JFrame {
 
     public List<Cliente> getSelecionadosExcluir(){
         int[] linhasSelecionadas = this.tabelaClientes.getSelectedRows();
-        List<Cliente> listaExcluir = new ArrayList();
+        List<Cliente> listaExcluir = new ArrayList<>();
         
         for(int i =0; i < linhasSelecionadas.length; i++){
             Cliente cliente = tabelaClientesModel.getSelecionado(linhasSelecionadas[i]);
