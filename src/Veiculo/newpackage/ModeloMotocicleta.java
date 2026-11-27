@@ -9,5 +9,6 @@ package Veiculo.newpackage;
  * @author User
  */
 public enum ModeloMotocicleta {
-    
+    CG125,
+    CBR500
 }
