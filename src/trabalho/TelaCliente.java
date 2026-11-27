@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package trabalho;
 
 import java.util.ArrayList;
@@ -69,6 +65,11 @@ public class TelaCliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         nomeInput.addActionListener(this::nomeInputActionPerformed);
 
@@ -88,6 +89,7 @@ public class TelaCliente extends javax.swing.JFrame {
         inserirButton.addActionListener(this::inserirButtonActionPerformed);
 
         atualizarButton.setText("Atualizar");
+        atualizarButton.addActionListener(this::atualizarButtonActionPerformed);
 
         excluirButton.setText("Excluir");
         excluirButton.addActionListener(this::excluirButtonActionPerformed);
@@ -95,6 +97,11 @@ public class TelaCliente extends javax.swing.JFrame {
         tituloTela.setText("Clientes");
 
         tabelaClientes.setModel(tabelaClientesModel);
+        tabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaClientesMouseClicked(evt);
+            }
+        });
         scroll.setViewportView(tabelaClientes);
 
         enderecoLabel.setText("Endereço:");
@@ -224,6 +231,42 @@ public class TelaCliente extends javax.swing.JFrame {
         tabelaClientesModel.removerClientes(lista);
     }//GEN-LAST:event_excluirButtonActionPerformed
 
+    private void atualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarButtonActionPerformed
+        if(clienteSelecionado == null){
+            JOptionPane.showMessageDialog(null,"Selecione pelo menos um cliente!" + "\n", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;  
+        }
+        
+        Cliente clone = new Cliente(clienteSelecionado.getNome(), clienteSelecionado.getSobrenome(), clienteSelecionado.getRg(), clienteSelecionado.getCpf(), clienteSelecionado.getEndereco());
+        clienteSelecionado.setNome(nomeInput.getText());
+        clienteSelecionado.setSobrenome(sobrenomeInput.getText());
+        clienteSelecionado.setRg(rgInput.getText()); 
+        clienteSelecionado.setCpf(cpfInput.getText()); 
+        clienteSelecionado.setEndereco(enderecoInput.getText());
+        
+        tabelaClientesModel.fireTableRowsUpdated(linhaSelecionada, linhaSelecionada);
+    }//GEN-LAST:event_atualizarButtonActionPerformed
+
+    private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
+        linhaSelecionada = tabelaClientes.rowAtPoint(evt.getPoint());
+        Cliente cliente = tabelaClientesModel.getDados(linhaSelecionada);
+        setFormularioCliente(cliente);
+    }//GEN-LAST:event_tabelaClientesMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        this.tabelaClientes.removeRowSelectionInterval(0, this.tabelaClientesModel.getRowCount()-1);
+        clienteSelecionado=null;
+    }//GEN-LAST:event_formMouseClicked
+                                                          
+    private void setFormularioCliente(Cliente cliente){
+        nomeInput.setText(cliente.getNome());
+        sobrenomeInput.setText(cliente.getSobrenome());
+        rgInput.setText(cliente.getRg()); 
+        cpfInput.setText(cliente.getCpf()); 
+        enderecoInput.setText(cliente.getEndereco());
+        clienteSelecionado = cliente;
+    }
+    
     /**
      * @param args the command line arguments
      */
