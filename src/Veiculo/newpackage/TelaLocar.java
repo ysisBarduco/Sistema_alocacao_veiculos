@@ -197,4 +197,3 @@ public class TelaLocar extends JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaLocar().setVisible(true));
     }
 }
-}

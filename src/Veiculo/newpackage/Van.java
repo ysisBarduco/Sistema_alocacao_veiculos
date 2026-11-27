@@ -11,8 +11,9 @@ package Veiculo.newpackage;
 public class Van extends Veiculo{
     ModeloVan modelo;
     
-    public Van(Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano) {
+    public Van(Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano, ModeloVan modelo) {
         super(marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+        this.modelo = modelo;
     }
 
     public ModeloVan getModelo() {

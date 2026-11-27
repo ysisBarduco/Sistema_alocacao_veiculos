@@ -9,13 +9,14 @@ package Veiculo.newpackage;
  * @author User
  */
 public class Motocicleta extends Veiculo{
-    ModeloMotocicleta modelo;
+    private ModeloMotocicleta modelo;
     
-    public Motocicleta(Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano) {
+    public Motocicleta(Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano, ModeloMotocicleta modelo) {
         super(marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+        this.modelo = modelo;
     }
     
-    ModeloMotocicleta getModelo(){
+    public ModeloMotocicleta getModelo(){
         return modelo;
     }
 

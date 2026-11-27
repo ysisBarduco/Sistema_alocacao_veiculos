@@ -127,11 +127,11 @@ public class TelaIncluirVeiculo extends JFrame {
 
         Veiculo v;
         if (modelo instanceof ModeloAutomovel) {
-            v = new Automovel(marca, estado, categoria, valorCompra, placa, ano, (ModeloAutomovel) modelo);
+            v = new Automovel(marca, estado, null, categoria, valorCompra, placa, ano, (ModeloAutomovel) modelo);
         } else if (modelo instanceof ModeloMotocicleta) {
-            v = new Motocicleta(marca, estado, categoria, valorCompra, placa, ano, (ModeloMotocicleta) modelo);
+            v = new Motocicleta(marca, estado, null, categoria, valorCompra, placa, ano, (ModeloMotocicleta) modelo);
         } else {
-            v = new Van(marca, estado, categoria, valorCompra, placa, ano, (ModeloVan) modelo);
+            v = new Van(marca, estado, null, categoria, valorCompra, placa, ano, (ModeloVan) modelo);
         }
 
         Repositorio.veiculos.add(v);

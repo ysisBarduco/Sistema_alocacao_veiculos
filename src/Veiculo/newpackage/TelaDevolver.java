@@ -67,5 +67,3 @@ public class TelaDevolver extends JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaDevolver().setVisible(true));
     }
 }
-
-}
